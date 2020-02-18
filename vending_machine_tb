@@ -1,0 +1,156 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 02/17/2020 01:03:06 AM
+// Design Name: 
+// Module Name: vending_machine_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module vending_machine_tb;
+    
+    reg clk, reset;
+    reg [7:0] coin;
+    
+    wire [7:0] change;
+    wire [7:0] total;
+    wire coke;
+    wire [7:0] state;
+    //reg [1:0] state;
+    
+    parameter nickel = 8'd05;
+    parameter dime = 8'd10;
+    parameter quarter = 8'd25;
+    parameter half_dollar = 8'd50;
+    parameter dollar = 8'd100;
+    
+    
+    vending_machine uut(.clk(clk),
+                        .reset(reset),
+                        .coin(coin),
+                        .change(change),
+                        .total(total),
+                        .coke(coke),
+                        .state(state));
+    
+    integer i;
+    
+        always
+		#50 clk = ~clk;
+    
+    initial begin
+    
+    
+    clk = 1;
+    reset = 1;
+    
+    #100;
+    reset = 0;
+    coin = quarter;
+    #100;
+   
+    
+
+    	  	 coin = nickel;
+             #100;
+             coin = dime;
+             #100;
+             coin = quarter;
+             #100;
+             coin = dollar;
+             #100;
+             
+             reset = 1;
+             coin = 0;
+             #100;
+             reset = 0;
+             
+             coin = half_dollar;
+             #100;
+             coin = dollar;
+             #100;
+             
+             reset = 1;
+             coin = 0;
+             #100;
+             reset = 0;
+             
+             coin = nickel;
+             #100;
+             coin = dime;
+             #100;
+             coin = half_dollar;
+             #100;
+             coin = dollar;
+             #100;
+             
+             reset = 1;
+             coin = 0;
+             #100;
+             reset = 0;
+             
+             coin = dollar;
+             #100;
+             coin = dollar;
+             #100;
+             
+             
+             reset = 1;
+             coin = 0;
+             #100;
+             reset = 0;
+             
+             
+             coin = quarter;
+             #100;
+             coin = dime;
+             #100;
+             coin = quarter;
+             #100;
+             coin = half_dollar;
+             #100;
+             coin = quarter;
+             #100;
+             coin = half_dollar;
+             #100;
+             
+             
+             reset = 1;
+             coin = 0;
+             #100;
+             reset = 0;
+             
+             
+             
+             for (i = 0; i < 20; i = i + 1) 
+             begin
+                coin = nickel;
+                #100;
+             end
+             
+             reset = 1;
+             coin = 0;
+             #100;
+             reset = 0;
+             
+   
+
+    end
+
+
+
+
+endmodule
